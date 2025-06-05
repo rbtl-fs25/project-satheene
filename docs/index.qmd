@@ -1,0 +1,251 @@
+---
+title: "Bins and Behavior: The Impact of Economic Incentives on Waste Separation Among ETH Students"
+format: 
+  html:
+    embed-resources: true
+    toc: true
+author:
+  - name: Satheene Michel
+    orcid: 0009-0004-3387-4385
+    email: smiche@ethz.ch
+    affiliation: 
+      - name: ETH Zurich
+        url: https://ethz.ch/de.html
+date: today
+table-of-contents: true
+bibliography: bibliography.bib
+editor: visual
+---
+
+# Import of Data
+
+```{r}
+suppressPackageStartupMessages(library(tidyverse))
+library(ggplot2)
+library(knitr)
+```
+
+```{r}
+data_visualizations <- read_csv("/cloud/project/data/processed/cleaned_data_2.csv", show_col_types = FALSE)
+```
+
+# Introduction
+
+Large institutions like ETH Zurich generate substantial amounts of waste, making them ideal environments for studying sustainable practices such as waste separation. With students comprising a major portion of the ETH community [@value], understanding their recycling behavior serves as a valuable starting point for enhancing campus-wide sustainability. Academic stress—particularly during exam periods—can significantly influence daily habits, including how diligently individuals engage in waste separation [@lahme2024enrollment]. This study investigates whether economic incentives can positively influence student waste separation behavior [@2022nudginga], comparing habits during exam and non-exam seasons within the context of the Open Research Lab course. Data was collected via an online survey administered through Google Forms. By identifying general patterns and potential motivators, this project hopes to contribute to ongoing conversations about student-centered sustainability efforts at ETH Zurich.
+
+# Methods
+
+Data was collected through an online questionnaire created using Google Forms. The survey was distributed to ETH Zurich students via social media platforms and word-of-mouth over a period of two weeks in spring 2025, mainly at the *ETH Zentrum Campus*. Questions focused on students’ waste separation habits, their attitudes toward recycling, and their reactions to hypothetical economic incentives - both during exam season and non-exam periods. Responses were anonymous, and participants provided informed consent at the beginning of the form. The resulting data was downloaded as a CSV file and cleaned in R using the tidyverse package for further analysis. Some answers had to be declared as *invalid* due to impossible responses (i.e. such as a household size of 200'000) and have been removed from the final cleaned data set used for the analysis.
+
+The following condition was used to filter out invalid responses to avoid making own wrong assumptions about the wrongful inputs: The household size should not be lower as 0 and not higher as 15 (generous upper limit).
+
+# Results
+
+To put the data presented in the results into context, @tbl-variables presents key descriptive statistics. In total 28 people answered the survey but due to the filter applied, described in the Methods section, the data set consists of 22 valid answers. On average, students reported a household size of 3.6, with a median self-rated confidence of 4 (out of 5). The reported effort during exam seasons was also relatively high. These figures help frame the subsequent analysis by describing general characteristics of the respondent population.
+
+```{r}
+#| eval: true
+#| label: tbl-variables
+#| tbl-cap: Summary Table of Key Variables from Survey
+
+
+# Summarize selected numeric variables
+summary_table <- data_visualizations %>%
+  summarise(
+    "Mean (Household)" = mean(household_size, na.rm = TRUE),
+    "Median (Household)" = median(household_size, na.rm = TRUE),
+    "Standard deviation (Household)" = sd(household_size, na.rm = TRUE),
+    
+    "Mean (Reported Confidence)" = mean(separation_confidence, na.rm = TRUE),
+    "Median (Reported Confidence)" = median(separation_confidence, na.rm = TRUE),
+    "Standard Deviation (Reported Confidence)" = sd(separation_confidence, na.rm = TRUE),
+    "Behavioral Change Reported (%)" = mean(changes_during_exams == "Yes", na.rm = TRUE)*100,
+
+    "Mean (Effort Exam Season)" = mean(effort_during_exams, na.rm = TRUE),
+    "Median (Effort Exam Season)" = median(effort_during_exams, na.rm = TRUE),
+    "Standard Deviation (Effort Exam Season)" = sd(effort_during_exams, na.rm = TRUE),
+    "Best Incentive Coffee (%)" = sum(best_incentives == "Coffee voucher", na.rm = TRUE) / n() *100,
+    "Best Incentice Cash (%)" = sum(best_incentives == "Cash rewards", na.rm = TRUE)/ n() * 100,
+    "Support Implementation (%)" = sum(support_eth == "Yes", na.rm = TRUE)/n() * 100,
+  ) %>%
+  pivot_longer(cols = everything(),
+               names_to = "Metric",
+               values_to = "Value")
+
+summary_table %>% 
+  kable(caption = "Summary Table of Key Variables")
+
+
+```
+
+To establish a baseline for interpreting later responses, the survey first captured students' self-assessment of their current recycling habits. A large majority (95.5%) of ETH students indicated that they currently actively participate in waste separation. When asked to rate their confidence in their recycling behavior on a scale from 1 (not confident at all) to 5 (very confident), the median response was 4, as seen in @fig-confidence, suggesting most respondents feel they recycle correctly and regularly. This high level of self-reported confidence highlights a generally positive recycling culture among the student population.
+
+```{r}
+#| eval: true
+#| fig-cap: Seperation Confidence of questioned students
+#| label: fig-confidence
+
+# Calculating median
+median_conf <- median(data_visualizations$separation_confidence, na.rm = TRUE)
+
+# Plot with named median line
+ggplot(data_visualizations, aes(x = separation_confidence)) +
+  geom_bar(fill = "coral") +
+  geom_vline(aes(xintercept = median_conf, color = "Median"), linetype = "dashed", linewidth = 1) +
+  scale_color_manual(name = "", values = c("Median" = "red")) +
+  labs(
+    title = "Self-Reported Recycling Confidence",
+    x = "Confidence Level (1 = Low, 5 = High)",
+    y = "Number of Students"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "right",
+        plot.title = element_text(hjust = 0.5)) 
+```
+
+This high estimate of the own recycling behavior does not really represent the actual recycling behavior at ETH. In 2024 ETH reported a recycling rate of 44% [@facts], meaning the self-assessment of the students questioned are most likely an overestimation of their actual recycling behavior [@fatihsudin2023inconvenience].
+
+Overall only a small percentile (13.6%) of students questioned reported that there are changes in their behavior between non-exam season and exam season. Those questioned that do observe a change in their recycling behavior name the additional time pressure as the leading factor, closely followed by stress and burnout/fatigue. This can be observed in the following pie chart @fig-changes .
+
+```{r}
+#| eval: true
+#| fig-cap: Causes for behavioral change
+#| label: fig-changes
+
+
+reason_counts <- data_visualizations %>%
+  dplyr::filter(!is.na(reason_for_change)) %>%
+  mutate(reason_for_change = str_split(reason_for_change, pattern = ",\\s*")) %>%
+  unnest(reason_for_change) %>%
+  count(reason_for_change, sort = TRUE) %>%
+  mutate(percentage = round(n / sum(n) * 100, 1),
+         label = paste0(reason_for_change, "\n(", percentage, "%)"))
+
+# Plot pie chart
+ggplot(reason_counts, aes(x = "", y = n, fill = reason_for_change)) +
+  geom_col(width = 1, color = "white") +
+  coord_polar(theta = "y") +
+  geom_text(aes(label = label), position = position_stack(vjust = 0.5), size = 2.7) +
+  labs(
+    title = "Reasons for Change in Recycling Behavior During Exam Season",
+    fill = "Reason"
+  ) +
+  theme_void() +
+  theme(
+    plot.title = element_text(hjust = 0.5)
+  )
+```
+
+To explore when different economic incentives are most effective, students were asked which type of incentive they preferred and when such incentives should be offered. The results visualized in @fig-incentivebytime, show that responses varied in timing and in type, but clear favorites emerged.
+
+For reference the students were told to choose between following incentives:
+
+-   Cash rewards (i.e. "Pfand" system from Germany)
+
+-   Coffee vouchers
+
+-   Leaderboard
+
+-   Chance to win a prize (i.e. tombola)
+
+And where then asked when said incentive would be most effective for them.
+
+Cash rewards emerged as the most frequently selected incentive, with a notable concentration of responses indicating their effectiveness particularly during exam season. This pattern suggests that direct financial compensation becomes even more attractive under heightened academic stress. In total, 81.8% of respondents chose cash rewards as the most motivating economic incentive.
+
+Interestingly, students who selected coffee vouchers predominantly rated them as equally effective during both academic phases. This implies that comfort-based rewards maintain steady appeal, regardless of exam-related cognitive load [@poortinga2018promoting]. Other incentive types, such as recognition and prize draws, were not selected at all and thus appear to offer limited motivational value within this student context.
+
+```{r}
+#| eval: true
+#| fig-cap: Most effective time for chosen economic incentive
+#| label: fig-incentivebytime
+
+
+# Clean and recode timing labels
+data_cleaned <- data_visualizations %>%
+  dplyr::filter(!is.na(best_incentives), !is.na(incentive_timing)) %>%
+  mutate(
+    best_incentives = str_to_title(best_incentives),
+    incentive_timing = case_when(
+      str_detect(str_to_lower(incentive_timing), "non") ~ "Non-Exam Season",
+      str_detect(str_to_lower(incentive_timing), "exam") ~ "During Exam Season",
+      TRUE ~ "Both Equally"
+    )
+  )
+
+# Count and calculate percentages
+incentive_plot_data <- data_cleaned %>%
+  count(best_incentives, incentive_timing) %>%
+  complete(best_incentives, incentive_timing, fill = list(n = 0)) %>%
+  group_by(incentive_timing) %>%
+  mutate(percentage = n / sum(n) * 100)
+
+# Plot
+ggplot(incentive_plot_data, aes(x = best_incentives, y = percentage, fill = incentive_timing)) +
+  geom_col(position = "fill", width = 0.5) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  labs(
+    title = "Preferred Incentives by Timing",
+    x = "Best incentive",
+    y = "Proportion of Respondents",
+    fill = "Most effective time for incentive"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5)
+  )
+
+```
+
+To evaluate the feasibility of implementing economic incentives, students were asked to indicate the minimum monetary amount required to motivate a change in their recycling behavior.
+
+We can observe in @fig-minimumvalue that 60% of the students would change their behavior when the incentive has a monetary value of maximal 5 CHF. Making the introduced economic incentives partially sensible, when correctly implemented.
+
+When examining the minimum monetary amount required to change recycling behavior, it is striking that only Bachelor's students selected the highest reward tier (10+ CHF). Specifically, 3 respondents from the Bachelor's group indicated that such a high incentive would be necessary for them to alter their habits, while no Master's students selected this option. This could reflect differences in financial expectations, time management challenges, or perceived value of incentives between the two groups. Bachelor's students—often newer to university life or balancing more rigid course structures—may feel that behavior change during high-stress periods requires stronger motivation.
+
+```{r}
+#| eval: true
+#| fig-cap: Minimum Incentive Value Needed to Change Behavior
+#| label: fig-minimumvalue
+
+# Clean and prepare data
+data_incentive_value <- data_visualizations %>%
+  dplyr::filter(!is.na(min_incentive), !is.na(degree_level)) %>%
+  mutate(min_incentive = str_to_title(min_incentive)) %>%
+  count(min_incentive, degree_level)
+
+# Plot absolute counts
+ggplot(data_incentive_value, aes(x = fct_reorder(min_incentive, -n), y = n, fill = degree_level)) +
+  geom_col(position = "dodge") +
+  labs(
+    title = "Minimum Incentive Value Needed to Change Behavior by Degree Level",
+    x = "Minimum Value of Incentive",
+    y = "Number of Respondents",
+    fill = "Degree Level"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    axis.text.x = element_text(angle = 30, hjust = 1)
+  )
+
+```
+
+Lastly when asked if the students would support any of these economic incentives if implemented in form of a project by ETH \~70% would support it, while the others are still unsure. Notably nobody would not support such a project being implemented.
+
+# Conclusion
+
+-   **High Self-Reported Confidence:** 95.5% of participants claim to actively separate waste, with a median confidence of 4 out of 5.
+
+-   **Limited Behavioral Change:** Only 13.6% of participants reported to notice a behavioral change between exam season and non-exam season, mainly due to fatigue and time-pressure.
+
+-   **Cash Rewards Favored:** Cash rewards were by far the most frequently selected incentive, chosen by 81.8% of respondents. While many students saw them as equally motivating throughout the academic year, a notable portion found them especially compelling during exam season—suggesting that financial incentives become even more attractive under academic pressure.
+
+-   **Coffee Vouchers maintain Appeal:** Students who selected coffee vouchers as their preferred incentive generally viewed them as equally effective during exam and non-exam periods. This indicates that comfort-based rewards like free coffee appeal consistently, regardless of cognitive stress levels.
+
+-   **No Appeal for Other Incentives:** Recognition and prize draws were not chosen, indicating lacking motivational appeal.
+
+-   **Feasibility of Low-Value Incentives:** 60% of participants said they would change their behavior for incentives worth ≤ 5 CHF.
+
+-   **Support for Implementation:** Around 70% of participants would support ETH, if they implemented an incentive-based recycling projects; more specifically no one explicitly objected.
+
+# References

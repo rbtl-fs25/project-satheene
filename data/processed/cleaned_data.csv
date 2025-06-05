@@ -1,0 +1,28 @@
+Timestamp,degree_program,degree_level,housing_type,household_size,stays_during_exams,separates_waste,separation_confidence,recyclables_location,changes_during_exams,how_changes,reason_for_change,effort_during_exams,best_incentives,incentive_timing,min_incentive,helpful_factors,support_eth,id,Paper,Plastic,Metal (such as Alu),Glass,Organic/Compost,NA
+2025-05-12T11:59:05Z,Mechanical Engineering,Bachelor,With family,5,Yes,Yes,4,Recycling stations,No,NA,NA,3,Cash rewards,both equally,Any reward no matter how small,NA,Yes,1,1,1,1,1,0,0
+2025-05-12T12:06:08Z,Mechanical Engineering,Bachelor,With family,4,Yes,Yes,4,Recycling stations,No,NA,NA,4,Cash rewards,both equally,10+ CHF,NA,"Unsure, maybe",2,1,1,1,1,1,0
+2025-05-12T12:15:24Z,Human Medicin,Bachelor,Shared private housing,2,Yes,Yes,4,Recycling stations,No,NA,NA,5,Cash rewards,both equally,10+ CHF,NA,Yes,3,1,1,1,1,0,0
+2025-05-12T12:45:04Z,Mechanical Engineering,Bachelor,Shared private housing,2,Yes,Yes,4,Recycling stations,No,NA,NA,5,Coffee voucher,Not effective at all,Any reward no matter how small,NA,Yes,4,1,1,1,1,1,0
+2025-05-12T13:54:38Z,Mechanical Engineering,Bachelor,With family,3,Yes,Yes,5,Recycling stations,No,NA,NA,5,Cash rewards,both equally,Any reward no matter how small,NA,Yes,5,1,1,1,1,1,0
+2025-05-12T21:47:53Z,Mechanical Engineering,Master,Shared private housing,2,Yes,Yes,5,Communal building bins,No,NA,NA,5,Cash rewards,both equally,Any reward no matter how small,NA,"Unsure, maybe",6,1,0,1,1,1,0
+2025-05-12T23:21:49Z,Mechanical Engineering,Master,With family,4,Yes,Yes,5,In-house bins,No,NA,NA,4,Cash rewards,both equally,2 - 5 CHF,NA,"Unsure, maybe",7,1,1,1,1,0,0
+2025-05-13T00:31:46Z,Pharmaceutical Sciences,Bachelor,With family,4,Yes,No,2,In-house bins,Yes,I separate less,"Time pressure, Stress, Fatigue / burnout",2,Cash rewards,both equally,2 - 5 CHF,NA,Yes,8,0,0,0,0,0,1
+2025-05-15T12:34:34Z,Mechanical Engineering,Master,Shared private housing,3,Yes,Yes,4,Recycling stations,No,NA,NA,5,Cash rewards,both equally,5 - 10 CHF,NA,"Unsure, maybe",9,1,1,1,1,1,0
+2025-05-15T12:58:30Z,Mechanical Engineering,Master,Shared private housing,3,Yes,Yes,5,Recycling stations,No,NA,NA,5,Cash rewards,both equally,Any reward no matter how small,NA,"Unsure, maybe",10,1,1,1,1,1,0
+2025-05-15T13:13:51Z,Biochemistry,Master,Alone,-2,Yes,No,5,Recycling stations,Yes,"I separate less, I separate less","Time pressure, Stress, Stress, Stress, Stress",5,Leaderboard / Recognition,both equally,I won't change my behavior for any amount of money,NA,"Unsure, maybe",11,0,0,0,0,0,1
+2025-05-15T13:23:16Z,Mechanical Engineering,Master,Shared private housing,987654321,Yes,Yes,4,I don't know,No,NA,NA,NA,Coffee voucher,Non-exam season,Any reward no matter how small,NA,Yes,12,1,1,1,1,1,0
+2025-05-15T13:28:29Z,Environmental Sciences,PhD,Alone,200000,No,No,1,I don't know,No,NA,NA,2,Chance to win a prize,both equally,I won't change my behavior for any amount of money,NA,"Unsure, maybe",13,0,0,0,1,0,0
+2025-05-15T13:30:27Z,Mechanical Engineering,Master,Shared private housing,3,Yes,Yes,4,Communal building bins,No,NA,NA,5,Cash rewards,both equally,2 - 5 CHF,NA,Yes,14,1,1,1,1,1,0
+2025-05-15T13:47:01Z,Mechanical Engineering,Master,Student housing,-5,Yes,No,1,I don't know,No,NA,NA,4,Coffee voucher,Not effective at all,I won't change my behavior for any amount of money,NA,"Unsure, maybe",15,1,1,1,1,1,0
+2025-05-15T13:48:47Z,Mechanical Engineering,Bachelor,Student housing,10000,Yes,Yes,4,In-house bins,No,NA,NA,5,Cash rewards,both equally,10+ CHF,NA,"Unsure, maybe",16,1,1,1,0,1,0
+2025-05-19T09:39:32Z,Mechanical Engineering,Master,Shared private housing,3,Yes,Yes,4,Recycling stations,No,NA,NA,5,Cash rewards,both equally,I won't change my behavior for any amount of money,NA,"Unsure, maybe",17,1,1,1,1,0,0
+2025-05-19T15:51:00Z,Health Sciences and Technology,Bachelor,With family,5,Yes,Yes,3,Recycling stations,No,NA,NA,5,Cash rewards,both equally,2 - 5 CHF,NA,Yes,18,1,1,1,1,1,0
+2025-05-19T16:07:59Z,Mechanical Engineering,Bachelor,Student housing,4,Yes,Yes,4,Communal building bins,No,NA,NA,4,Coffee voucher,both equally,Any reward no matter how small,NA,Yes,19,1,1,1,1,1,0
+2025-05-19T16:18:22Z,Mathematics,Master,Alone,1,Yes,Yes,3,Recycling stations,No,NA,NA,5,Cash rewards,both equally,Any reward no matter how small,NA,Yes,20,1,0,1,1,1,0
+2025-05-19T16:23:45Z,Mechanical Engineering,Master,Shared private housing,3,Yes,Yes,4,In-house bins,No,NA,NA,5,Cash rewards,both equally,2 - 5 CHF,NA,Yes,21,1,1,1,1,1,0
+2025-05-19T16:35:02Z,Mathematics,Bachelor,Shared private housing,4,Yes,Yes,3,Communal building bins,No,NA,NA,3,Coffee voucher,both equally,10+ CHF,NA,Yes,22,1,0,1,1,1,0
+2025-05-19T16:38:54Z,Environmental Sciences,Master,Alone,1,Yes,Yes,4,Communal building bins,Yes,I separate less,Time pressure,3,Cash rewards,During Exam/Study Season,5 - 10 CHF,NA,Yes,23,1,1,1,1,1,0
+2025-05-19T16:47:29Z,Mechanical Engineering,Bachelor,With family,3,Yes,Yes,4,Recycling stations,No,NA,NA,4,Cash rewards,both equally,I won't change my behavior for any amount of money,NA,Yes,24,1,1,1,1,1,0
+2025-05-19T17:53:27Z,Human Medicin,Bachelor,Shared private housing,2,Yes,Yes,3,Recycling stations,No,NA,NA,5,Cash rewards,both equally,2 - 5 CHF,NA,Yes,25,1,0,1,1,0,0
+2025-05-20T11:33:30Z,Mechanical Engineering,Master,Shared private housing,3,Yes,Yes,4,Recycling stations,No,NA,NA,4,Coffee voucher,both equally,2 - 5 CHF,NA,Yes,26,1,1,1,1,1,0
+2025-05-20T15:10:11Z,Mathematics,Bachelor,With family,4,Yes,Yes,4,Recycling stations,Yes,"I separate less, But it doesn't change *that* much (except for exam days specifically)","Time pressure, Stress, Fatigue / burnout, Lack of motivation",4,Cash rewards,both equally,5 - 10 CHF,NA,"Unsure, maybe",27,1,1,1,1,1,0

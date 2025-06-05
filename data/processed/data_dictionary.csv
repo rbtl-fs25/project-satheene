@@ -1,0 +1,25 @@
+variable_name,description
+household_size,Number of people living in the respondents household
+degree_program,Current degree respondent is undertaking
+degree_level,Current academic level the respondent is in
+housing_type,In what kind of housing the respondent currently lives 
+stays_during_exam,TRUE/FALSE - wether the person stays in Zurich during exam preparation
+separates_waste,TRUE/FALSE - wether one separates waste
+Paper,TRUE/FALSE - whether paper is separated
+Plastic,TRUE/FALSE - whether plastic is separated
+Metal (such as Alu),TRUE/FALSE - whether metal is separated
+Glass,TRUE/FALSE - whether glass is separated
+Organic/Compost,TRUE/FALSE - whether organic waste is separated
+NA,TRUE/FALSE - true when no waste separation occurs
+id,Unique respondent identifier
+separation_confidence,"Personal assessment of ones own recycling behavior (1: bad, 5: perfect)"
+recyclables_location,Where the respondent disposes of his/her/their recyclables
+changes_during_exams,TRUE/FALSE - wether respondent notices change in their recycling behavior in between different academic periods (exam vs. non-exam season)
+how_changes,How his/her/their recycling behavior changes
+reasons_for_change,Why his/her/their recycling behavior changes
+effort_during_exams,"Personal assessment of effort inputted into waste separationd during exam-season (1: none at all, 5: same as usual)"
+best_incentives,Best economic incentive
+incentive_timing,Time when the chosen best_incentive would be most effective
+min_incentive,Minimal monetary amount the repsondent would change his/her/their behavior for
+helpful_factor,Optional input to what would help the respondent separate better at ETH
+support_eth,Wether or not the respondent would support an economic incentive based project if introduced by ETH
