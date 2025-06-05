@@ -248,4 +248,10 @@ Lastly when asked if the students would support any of these economic incentives
 
 -   **Support for Implementation:** Around 70% of participants would support ETH, if they implemented an incentive-based recycling projects; more specifically no one explicitly objected.
 
+# Disclaimer
+
+This report is based on a survey that does not provide enough data to make empirical conclusions and does not represent ETH students as a whole.
+
+Some portions of the phrasing and rewording in this document were assisted by OpenAI's ChatGPT to enhance clarity and readability.
+
 # References
